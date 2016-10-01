@@ -46,8 +46,8 @@ class VariantsController extends Controller
                 $attributeName = func_get_arg(2);
             }
             $data = $request->all();
-            $name = isset($attributeName)?$attributeName:$data['attribute'][0]['name'];
-            $value = $data['attribute'][0]['value'];
+            $name = isset($attributeName)?$attributeName:$data['attribute']['name'];
+            $value = $data['attribute']['value'];
             $attribute = Attributes::firstOrNew(['name' => $name]);
             $saveData = Attributables::firstOrNew([
                             'attribute_id'=>$attribute->id,
