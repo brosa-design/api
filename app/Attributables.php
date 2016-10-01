@@ -10,7 +10,7 @@ class Attributables extends Model
     
     protected $fillable = ['attribute_id','value','created_by'];
     
-    public function commentable()
+    public function attributable()
     {
         return $this->morphTo();
     }

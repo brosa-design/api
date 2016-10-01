@@ -18,4 +18,13 @@ class ProductVariants extends Model
         return $this->morphMany('App\Attributables', 'attributable');
     }
     
+    public function stockables()
+    {
+        return $this->morphMany('App\StockItems', 'stockable');
+    }
+    
+    public function packables()
+    {
+        return $this->morphMany('App\Packages', 'packable');
+    }
 }

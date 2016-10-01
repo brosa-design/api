@@ -9,6 +9,7 @@ use App\Http\Requests;
 use App\Attributes;
 use App\Attributables;
 use App\ProductVariants;
+use App\StockItems;
 
 class VariantsController extends Controller
 {
@@ -49,11 +50,6 @@ class VariantsController extends Controller
             $name = isset($attributeName)?$attributeName:$data['attribute']['name'];
             $value = $data['attribute']['value'];
             $attribute = Attributes::firstOrNew(['name' => $name]);
-            $saveData = Attributables::firstOrNew([
-                            'attribute_id'=>$attribute->id,
-                            'value'=>$value,
-                            'created_by'=>1
-                        ]);
             if($attribute->exists){
                 $productAttributes = ProductVariants::find($variantId)->attributables->where('attribute_id',$attribute->id);
                 if(count($productAttributes)>0){
@@ -75,11 +71,6 @@ class VariantsController extends Controller
                     $attribute->name = $name;
                     $attribute->created_by = 1;
                     $attribute->save();
-                    $saveData = Attributables::firstOrNew([
-                                'attribute_id'=>$attribute->id,
-                                'value'=>$value,
-                                'created_by'=>1
-                            ]);
                     $productAttribute = ProductVariants::find($variantId);
                     $productAttribute->attributables()->save(Attributables::firstOrNew([
                                 'attribute_id'=>$attribute->id,

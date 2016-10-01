@@ -13,6 +13,11 @@ class Products extends Model
         return $this->belongsTo(Collections::class);
     }
     
+    public function stockItems()
+    {
+        return $this->belongsTo(StockItems::class);
+    }
+    
     public function variant()
     {
         return $this->hasMany(ProductVariants::class);
