@@ -13,7 +13,7 @@ use Illuminate\Http\Request;
   |
  */
 
-Route::get('products', 'ProductsController');
+Route::get('products', 'ProductsController@index');
 Route::get('products/{id}/variants', 'ProductsController@getVariants');
 Route::post('variants/{id}/attributes/{attribute?}', 'VariantsController@store');
 Route::post('order/make', 'OrderController@store');
