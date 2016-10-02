@@ -20,7 +20,13 @@ class StockItems extends Model {
         return $this->morphTo();
     }
     
-    
+    /**
+     * Updates and attribute's value or Creates an attribute if it does not exist
+     * depeding on the request
+     * 
+     * @param       String  $sku 
+     * @response    Object 
+     */
     public function matchSku($sku) {
         
         return $this->where(['sku' => $sku, 'status' => 'Available'])->get();
