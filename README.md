@@ -14,7 +14,7 @@ The app is able to do the following,
    Lists all products, the respective variants and the associated attributes
 
    Method: GET<br>
-   Response Status: 200 OK<br>
+   Response Status: 200 OK<br><br>
    {
      "products": [
        {
@@ -86,7 +86,7 @@ The app is able to do the following,
    List all variants of a product specified by product_id
    
    Method: GET<br>
-   Response Status: 200 OK<br>
+   Response Status: 200 OK<br><br>
    {
      "product_variants": [
        {
@@ -109,7 +109,7 @@ The app is able to do the following,
    
    Method: POST<br>
    Input Params (x-www-form-urlencoded): attribute[name],attribute[value]<br>
-   Response Status: 200 OK<br>
+   Response Status: 200 OK<br><br>
    {
    "id": 1,
    "variant_id": 1,
@@ -124,7 +124,7 @@ The app is able to do the following,
 
    Method: POST<br>
    Input Params (x-www-form-urlencoded): attribute[value]<br>
-   Response Status: 200 OK<br>
+   Response Status: 200 OK<br><br>
    {
       "id": 1,
       "variant_id": 1,
@@ -155,7 +155,7 @@ The app is able to do the following,
           "quantity": 1
         }]
       }
-    }<br><br>
+    }<br>
     
     Response Status: 200 OK<br>
     
