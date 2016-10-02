@@ -4,17 +4,16 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Packages extends Model
-{
+class Packages extends Model {
+
     protected $table = 'packages';
-    
-    public function stockItem()
-    {
+
+    public function stockItem() {
         return $this->hasMany(StockItems::class);
     }
-    
-    public function packable()
-    {
+
+    public function packable() {
         return $this->morphTo();
     }
+
 }
