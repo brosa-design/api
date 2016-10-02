@@ -27,7 +27,8 @@ class OrderController extends Controller {
      * Updates or Creates an Iteam depeding on the
      * order requirement
      * 
-     * @param  \Illuminate\Http\Request  $request 
+     * @param  Request  $request 
+     * @return JSON object
      */
     public function store(Request $request) {
         try {
@@ -48,16 +49,21 @@ class OrderController extends Controller {
                     $this->createItem($order->id, $sku, $quanity);
                 }
             }
+            
             return json_encode(array("success: " => "Done"));
+            
         } catch (Exception $ex) {
+            
             return json_encode(array("error" => "Error: " . $ex->getMessage()));
+            
         }
     }
 
     /**
      * Create a new order
      * 
-     * @param array $data  
+     * @param array $data
+     * @return Orders object
      */
     public function createOrder($data) {
         $order = new Orders;
@@ -71,7 +77,9 @@ class OrderController extends Controller {
         $order->date = date('Y-m-d H:i:s');
         $order->created_by = 1;
         $order->save();
+        
         return $order;
+        
     }
 
     /**
