@@ -59,24 +59,14 @@ class VariantsController extends Controller
                         $productAttribute->save();  
                     }
                 }else{
-                    $productAttribute = ProductVariants::find($variantId);
-                    $productAttribute->attributables()->save(Attributables::firstOrNew([
-                            'attribute_id'=>$attribute->id,
-                            'value'=>$value,
-                            'created_by'=>1
-                        ]));
+                    $this->createAttributable($variantId,$attribute->id,$value);
                 }
             }else{
                 if(!isset($attributeName)){
                     $attribute->name = $name;
                     $attribute->created_by = 1;
                     $attribute->save();
-                    $productAttribute = ProductVariants::find($variantId);
-                    $productAttribute->attributables()->save(Attributables::firstOrNew([
-                                'attribute_id'=>$attribute->id,
-                                'value'=>$value,
-                                'created_by'=>1
-                            ]));
+                    $this->createAttributable($variantId,$attribute->id,$value);
                 }else{
                     return json_encode(array("Error: "=>"No attribute with the specified name found!"));
                 }
@@ -87,6 +77,15 @@ class VariantsController extends Controller
         }
     }
 
+    public function createAttributable($variantId,$attributeId,$value){
+        $productAttribute = ProductVariants::find($variantId);
+        $productAttribute->attributables()->save(Attributables::firstOrNew([
+                'attribute_id'=>$attributeId,
+                'value'=>$value,
+                'created_by'=>1
+            ]));
+    }
+    
     /**
      * Display the specified resource.
      *
