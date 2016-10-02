@@ -4,6 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use App\Attributes;
+use App\StockItems;
 
 
 class ProductVariants extends Model {
@@ -72,6 +73,45 @@ class ProductVariants extends Model {
         
         return $attributes_arr;
         
+    }
+    
+    /**
+     * Creates a new item and assign it to the order
+     * 
+     * @param int $orderId
+     * @param string $sku
+     * @param int $count  
+     */
+    public function createItem($orderId, $sku, $count) {
+        for ($i = 1; $i <= $count; $i++) {
+            $variant = $this->where('sku', $sku)->first();
+            foreach ($variant->packables as $packable) {
+                $package_id = $packable->id;
+            }
+            $variant->stockables()->save(StockItems::firstOrNew([
+                        'package_id' => $package_id,
+                        'product_variant_id' => $variant->id,
+                        'order_id' => $orderId,
+                        'sku' => $sku,
+                        'status' => 'Assigned',
+                        'physical_status' => 'To order',
+                        'created_by' => 1
+            ]));
+        }
+    }
+
+    /**
+     * Assign available items to the order
+     * 
+     * @param int $orderId  
+     * @param array $items  
+     */
+    public function updateItem($orderId, $items) {
+        foreach ($items as $item) {
+            $item->order_id = $orderId;
+            $item->status = 'Assigned';
+            $item->save();
+        }
     }
 
 }

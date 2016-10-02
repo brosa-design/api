@@ -16,5 +16,9 @@ class StockItems extends Model {
     public function stockable() {
         return $this->morphTo();
     }
+    
+    public function matchSku($sku) {
+        return $this->where(['sku' => $sku, 'status' => 'Available'])->get();
+    }
 
 }
