@@ -1,27 +1,63 @@
-# Laravel PHP Framework
+# API Calls using Laravel 5.3
 
-[![Build Status](https://travis-ci.org/laravel/framework.svg)](https://travis-ci.org/laravel/framework)
-[![Total Downloads](https://poser.pugx.org/laravel/framework/d/total.svg)](https://packagist.org/packages/laravel/framework)
-[![Latest Stable Version](https://poser.pugx.org/laravel/framework/v/stable.svg)](https://packagist.org/packages/laravel/framework)
-[![Latest Unstable Version](https://poser.pugx.org/laravel/framework/v/unstable.svg)](https://packagist.org/packages/laravel/framework)
-[![License](https://poser.pugx.org/laravel/framework/license.svg)](https://packagist.org/packages/laravel/framework)
+The app is able to do the following,
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable, creative experience to be truly fulfilling. Laravel attempts to take the pain out of development by easing common tasks used in the majority of web projects, such as authentication, routing, sessions, queueing, and caching.
+1. Internal API Calls (GET/POST x-www-form-urlencoded)
+2. External API Call (POST usin JSON(application/json))
 
-Laravel is accessible, yet powerful, providing tools needed for large, robust applications. A superb inversion of control container, expressive migration system, and tightly integrated unit testing support give you the tools you need to build any application with which you are tasked.
+## API Endpoints implemented
 
-## Official Documentation
+The API Client used is Postman
 
-Documentation for the framework can be found on the [Laravel website](http://laravel.com/docs).
+###Internal
 
-## Contributing
+1. http://115.248.209.92/api/public/api/products<br>
+   Method: GET<br>
+   Response Status: 200 OK<br>
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](http://laravel.com/docs/contributions).
+2. http://115.248.209.92/api/public/api/products/{id}/variants<br>
+   Method: GET<br>
+   Response Status: 200 OK<br>
 
-## Security Vulnerabilities
+3. http://115.248.209.92/api/public/api/variants/{id}/attributes<br>
+   Method: POST<br>
+   Response Status: 200 OK<br>
+   Input Params (x-www-form-urlencoded): attribute[name],attribute[value]<br>
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell at taylor@laravel.com. All security vulnerabilities will be promptly addressed.
+3. http://115.248.209.92/api/public/api/variants/{id}/attributes/{name}<br>
+   Method: POST<br>
+   Response Status: 200 OK<br>
+   Input Params (x-www-form-urlencoded): attribute[value]<br>
 
-## License
+###External
 
-The Laravel framework is open-sourced software licensed under the [MIT license](http://opensource.org/licenses/MIT).
+1. http://115.248.209.92/api/public/api/order/make<br>
+   Method: GET<br>
+   Response Status: 200 OK<br>
+   JSON Payload (application/json):<br>
+   {
+    "Order": {
+        "customer": "Gabriel Jaramillo",
+        "address": "test address",
+        "total": 100,
+        "source": "ShopClues",
+        "group_dispatch": "yes",
+        "Status": "new",
+        "payment": "credit",
+        "items": [{
+          "sku": "OTTMANBLAC",
+          "quantity": 2
+        }, {
+          "sku": "ARMCHBLUE",
+          "quantity": 1
+        }]
+      }
+    }
+
+## Installation 
+
+1. Checkout HEAD rivision of this repo to the webserver's root folder 
+2. Create MySql Database, brosa_test
+3. Import SQL (http://115.248.209.92/api/29-09-2016testdb-api-test.sql)
+4. Modify DB_ parameters in the env file to reflect the connection to the database
+
