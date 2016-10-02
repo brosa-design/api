@@ -1,5 +1,13 @@
 <?php
-
+/**
+ * Controller class to list all products and to list 
+ * all produst_variants of a specified product.
+ * 
+ * 
+ * @package    Http
+ * @subpackage Controllers
+ * @author     Vikas Thakur <vikascalls@gmail.com>
+ */
 namespace App\Http\Controllers;
 
 use App\Products;
@@ -14,14 +22,14 @@ use Illuminate\Pagination\Paginator;
 
 class ProductsController extends Controller {
 
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    private $rpp = 25;
+    private $rpp = 25; //Results Per Page
     
-
+    /**
+     * List all products, their respective variants 
+     * and the attributes of the variants
+     * 
+     * @return JSON object 
+     */
     public function index() {
         try {
             
@@ -50,11 +58,25 @@ class ProductsController extends Controller {
         }
     }
 
+    
+    /**
+     * Retrieve the catergory name by id
+     * 
+     * @param  int  $id
+     * @return string Category name 
+     */
     public function getCategoryName($id) {
         $collection = Collections::find($id);
         return $collection->name;
     }
 
+    /**
+     * Retrieve the product_variants of a product and 
+     * their attributes
+     * 
+     * @param  int  $id
+     * @return array Array of all retrieved variants 
+     */
     public function getVariantsByProduct($id) {
         $variants = ProductVariants::where('product_id', $id)
                 ->orderBy('sku', 'desc')
@@ -74,6 +96,12 @@ class ProductsController extends Controller {
         return $variants_arr;
     }
 
+    /**
+     * Retrieve the attributes of a product variant
+     * 
+     * @param  int  $id
+     * @return array Array of all retrieved attributes 
+     */
     public function getAttributesByVariant($id) {
         $attributes = ProductVariants::find($id)->attributables;
         $attributes_arr = array();
@@ -87,10 +115,23 @@ class ProductsController extends Controller {
         return $attributes_arr;
     }
 
+    /**
+     * Retrieve the attribute name by id
+     * 
+     * @param  int  $id
+     * @return string Attribute name 
+     */
     public function getAttributeName($id) {
         $attributes = Attributes::find($id);
         return $attributes->name;
     }
+    
+    /**
+     * Retrieve all product_variants of a product
+     * 
+     * @param  int  $id
+     * @return JSON object  
+     */
     
     public function getVariants($id) {
         $currentPage = isset($_GET['page'])?$_GET['page']:1;        

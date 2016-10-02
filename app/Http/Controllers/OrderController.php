@@ -6,6 +6,10 @@
  * The available items are assigned to the order. The unavailable 
  * items are created, assigned to the order and have their 
  * physical_status set to 'To Order'.
+ * 
+ * @package    Http
+ * @subpackage Controllers
+ * @author     Vikas Thakur <vikascalls@gmail.com>
  */
 namespace App\Http\Controllers;
 
