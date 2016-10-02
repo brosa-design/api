@@ -168,3 +168,19 @@ The app is able to do the following,
 4. Modify DB_ parameters in the env file to reflect the connection to the database
 5. Use Postman or similar API Client to consume webservices
 
+## Assumptions
+
+1. The database dump provided had the structure followed ('brosa\Models\ProductVariant') in the tables with polymorphic relation. This has been changed to reflect the structure of the test app  
+2. Because the default value of created_at and updated_at was showing up as invalid, it is channged to CURRENT_TIMESTAMP from 0000-00-00 00:00:00
+3. created_by is assumed to be 1 throughout the app
+4. It is assumed that the JSON schema will not changed and hence the validation of the JSON object is not implemented
+5. Pagination is implemented for the results of the GET endpoints. It is assumed that 'page' parameter will be passed in the query string to increment the page
+6. In the endpoint /api/products/{id}/variants/ response expected, id and variant_id are the same
+7. In the endpoint /api/products/ response expected, under variant, name must not exist since variant does not have name as per the product_variant table
+
+## To do
+
+1. Since this is my first commercial level implementation, I have not fully realised the potential of Laravel. I would like to study more and look at the possibilties to make the app more structured
+2. Considering the size of the app some model functions are included and called from the controller itself. That can be refactored. 
+3. The code is compliant to the PSR-2 standards which I am experienced with. I have attempted to comply to PSR-4. If there is any room for improvement kindly suggest. 
+4. The test app can have the user Auth implemented to streamline the transactions, especially the make Order
