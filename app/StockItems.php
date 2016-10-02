@@ -15,7 +15,7 @@ class StockItems extends Model
         return $this->belongsTo(Orders::class);
     }
     
-        public function stockable()
+    public function stockable()
     {
         return $this->morphTo();
     }
