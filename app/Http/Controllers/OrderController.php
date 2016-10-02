@@ -1,5 +1,12 @@
 <?php
-
+/**
+ * Controller class to process incoming order request.
+ * The class finds the number of available items in the
+ * Items(stock_items) table as mentioned in the order request.
+ * The available items are assigned to the order. The unavailable 
+ * items are created, assigned to the order and have their 
+ * physical_status set to 'To Order'.
+ */
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
@@ -12,10 +19,10 @@ use App\ProductVariants;
 class OrderController extends Controller
 {
     /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * Updates or Creates an Iteam depeding on the
+     * order requirement
+     * 
+     * @param  \Illuminate\Http\Request  $request 
      */
     public function store(Request $request)
     {
@@ -44,6 +51,11 @@ class OrderController extends Controller
         
     }
     
+    /**
+     * Create a new order
+     * 
+     * @param array $data  
+     */
     public function createOrder($data){
         $order = new Orders;
         $order->name = $data['Order']['customer'];
@@ -59,6 +71,14 @@ class OrderController extends Controller
         return $order;
     }
     
+    
+    /**
+     * Creates a new item and assign it to the order
+     * 
+     * @param int $orderId
+     * @param string $sku
+     * @param int $count  
+     */
     public function createItem($orderId,$sku,$count){
         for($i=1;$i<=$count;$i++){
             $variant = ProductVariants::where('sku',$sku)->first();
@@ -77,6 +97,12 @@ class OrderController extends Controller
         }
     }
     
+    /**
+     * Assign available items to the order
+     * 
+     * @param int $orderId  
+     * @param array $items  
+     */
     public function updateItem($orderId,$items){
         foreach($items as $item){
             $item->order_id = $orderId;
