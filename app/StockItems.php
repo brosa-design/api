@@ -25,7 +25,7 @@ class StockItems extends Model {
      * depeding on the request
      * 
      * @param       String  $sku 
-     * @response    Object 
+     * @response    Stock Items object 
      */
     public function matchSku($sku) {
         
