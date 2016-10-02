@@ -182,5 +182,5 @@ The app is able to do the following,
 
 1. Since this is my first commercial level implementation, I have not fully realised the potential of Laravel. I would like to study more and look at the possibilties to make the app more structured
 2. Considering the size of the app some model functions are included and called from the controller itself. That can be refactored. 
-3. The code is compliant to the PSR-2 standards which I am experienced with. I have attempted to comply to PSR-4. If there is any room for improvement kindly suggest. 
+3. The code is compliant to the PSR-2 standards which I am experienced with. I have attempted to comply to PSR-4. If there is any room for improvement, kindly suggest. 
 4. The test app can have the user Auth implemented to streamline the transactions, especially the make Order
