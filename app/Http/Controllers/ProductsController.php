@@ -43,11 +43,13 @@ class ProductsController extends Controller {
             $products = Products::paginate($this->rpp);
             $products_arr = array();
             foreach ($products as $product) {
+                $collection = new Collections();
+                $productVariants = new ProductVariants();
                 $products_arr[] = array(
                     "id" => $product->id,
                     "name" => $product->name,
-                    "Collection_name" => $this->getCategoryName($product->collection_id),
-                    "variants" => $this->getVariantsByProduct($product->id),
+                    "Collection_name" => $collection->getCategoryName($product->collection_id),
+                    "variants" => $productVariants->getVariantsByProduct($product->id),
                 );
             }
             
@@ -62,79 +64,6 @@ class ProductsController extends Controller {
             return json_encode(array("error" => "Error: " . $ex->getMessage()));
             
         }
-    }
-
-    /**
-     * Retrieve the catergory name by id
-     * 
-     * @param  int  $id
-     * @return string Category name 
-     */
-    public function getCategoryName($id) {
-        $collection = Collections::find($id);
-        
-        return $collection->name;
-        
-    }
-
-    /**
-     * Retrieve the product_variants of a product and 
-     * their attributes
-     * 
-     * @param  int  $id
-     * @return array Array of all retrieved variants 
-     */
-    public function getVariantsByProduct($id) {
-        $variants = ProductVariants::where('product_id', $id)
-                ->orderBy('sku', 'desc')
-                ->get();
-        $variants_arr = array();
-        foreach ($variants as $variant) {
-            $variants_arr[] = array(
-                "id" => $variant->id,
-                //"name"=>$variant->name,
-                "sku" => $variant->sku,
-                "cost_price" => $variant->cost_price,
-                "is_active" => $variant->is_active == '1' ? 'yes' : 'no',
-                "attributes" => $this->getAttributesByVariant($variant->id)
-            );
-        }
-
-        return $variants_arr;
-    }
-
-    /**
-     * Retrieve the attributes of a product variant
-     * 
-     * @param  int  $id
-     * @return array Array of all retrieved attributes 
-     */
-    public function getAttributesByVariant($id) {
-        $attributes = ProductVariants::find($id)->attributables;
-        $attributes_arr = array();
-        foreach ($attributes as $attribute) {
-            $attributes_arr[] = array(
-                "id" => $attribute->id,
-                "attribute_name" => $this->getAttributeName($attribute->attribute_id),
-                "value" => $attribute->value
-            );
-        }
-        
-        return $attributes_arr;
-        
-    }
-
-    /**
-     * Retrieve the attribute name by id
-     * 
-     * @param  int  $id
-     * @return string Attribute name 
-     */
-    public function getAttributeName($id) {
-        $attributes = Attributes::find($id);
-        
-        return $attributes->name;
-        
     }
 
     /**
