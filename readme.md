@@ -164,7 +164,7 @@ The app is able to do the following,
 
 1. Checkout HEAD rivision of this repo to the webserver's root folder 
 2. Create MySql Database, brosa_test
-3. Import SQL (http://115.248.209.92/api/29-09-2016testdb-api-test.sql)
+3. Import SQL (http://115.248.209.92/api/api.sql)
 4. Modify DB_ parameters in the env file to reflect the connection to the database
 5. Use Postman or similar API Client to consume webservices
 
