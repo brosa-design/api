@@ -14,6 +14,6 @@ use Illuminate\Http\Request;
  */
 
 Route::resource('products', 'ProductsController');
-Route::get('/products/{id}/variants/', 'ProductsController@getVariants');
-Route::post('/variants/{id}/attributes/{attribute?}', 'VariantsController@store');
+Route::get('products/{id}/variants', 'ProductsController@getVariants');
+Route::post('variants/{id}/attributes/{attribute?}', 'VariantsController@store');
 Route::post('order/make', 'OrderController@store');
