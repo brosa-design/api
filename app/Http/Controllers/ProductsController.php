@@ -13,21 +13,13 @@
 namespace App\Http\Controllers;
 
 use App\Products;
-
 use App\Collections;
-
 use App\ProductVariants;
-
 use App\Attributables;
-
 use App\Attributes;
-
 use App\Http\Requests;
-
 use Illuminate\Http\Request;
-
 use Illuminate\Pagination\Paginator;
-
 
 class ProductsController extends Controller {
 

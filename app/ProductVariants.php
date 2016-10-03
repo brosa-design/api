@@ -5,7 +5,6 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 
 use App\Attributes;
-
 use App\StockItems;
 
 class ProductVariants extends Model {

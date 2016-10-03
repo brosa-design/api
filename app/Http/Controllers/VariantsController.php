@@ -14,15 +14,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
 use App\Http\Requests;
-
 use App\Attributes;
-
 use App\Attributables;
-
 use App\ProductVariants;
-
 use App\StockItems;
 
 class VariantsController extends Controller {
