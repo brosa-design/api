@@ -30,3 +30,4 @@ class Attributes extends Model
     }
 
 }
+?>

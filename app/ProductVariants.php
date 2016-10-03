@@ -127,3 +127,4 @@ class ProductVariants extends Model
     }
 
 }
+?>

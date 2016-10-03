@@ -29,3 +29,4 @@ class Collections extends Model
     }
 
 }
+?>

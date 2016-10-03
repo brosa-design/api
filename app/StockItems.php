@@ -35,3 +35,4 @@ class StockItems extends Model {
     }
 
 }
+?>
