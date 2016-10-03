@@ -96,7 +96,7 @@ class ProductVariants extends Model {
             foreach ($variant->packables as $packable) {
                 $package_id = $packable->id;
             }
-            $variant->stockables()->save(StockItems::firstOrNew([
+            $variant->stockables()->save(new StockItems([
                         'package_id' => $package_id,
                         'product_variant_id' => $variant->id,
                         'order_id' => $orderId,
