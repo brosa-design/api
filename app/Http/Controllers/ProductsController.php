@@ -52,17 +52,15 @@ class ProductsController extends Controller {
                     "variants" => $productVariants->getVariantsByProduct($product->id),
                 );
             }
-            
+
             return json_encode(array(
                 "products" => $products_arr,
                 "count" => $products->count(),
                 "pages" => ceil(($products->total()) / $this->rpp),
                 "current_page" => $products->currentPage()));
-            
         } catch (Exception $ex) {
-            
+
             return json_encode(array("error" => "Error: " . $ex->getMessage()));
-            
         }
     }
 
@@ -75,9 +73,8 @@ class ProductsController extends Controller {
     public function getVariants($id) {
         $currentPage = isset($_GET['page']) ? $_GET['page'] : 1;
         Paginator::currentPageResolver(function() use ($currentPage) {
-            
+
             return $currentPage;
-            
         });
 
         $variants = ProductVariants::where('product_id', $id)
@@ -101,7 +98,6 @@ class ProductsController extends Controller {
             "count" => $variants->count(),
             "pages" => ceil(($variants->total()) / $this->rpp),
             "current_page" => $variants->currentPage()));
-        
     }
 
 }

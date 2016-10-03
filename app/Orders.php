@@ -9,11 +9,10 @@ class Orders extends Model {
     protected $table = 'orders';
 
     public function stockItem() {
-        
+
         return $this->hasMany(StockItems::class);
-        
     }
-    
+
     /**
      * Create a new order
      * 
@@ -32,8 +31,8 @@ class Orders extends Model {
         $order->date = date('Y-m-d H:i:s');
         $order->created_by = 1;
         $order->save();
-        
+
         return $order;
-        
     }
+
 }

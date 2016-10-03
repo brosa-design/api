@@ -62,20 +62,17 @@ class VariantsController extends Controller {
                     $attribute->save();
                     $this->createAttributable($variantId, $attribute->id, $value);
                 } else {
-                    
+
                     // If optional attribute name parameter is included in the URI
                     // but does not exist in the table, error message is returned 
                     return json_encode(array("Error: " => "No attribute with the specified name found!"));
-                    
                 }
             }
-            
+
             return json_encode(array("id" => $variantId, "variant_id" => $variantId, "attribute_id" => $attribute->id, "value" => $value, "attribute_name" => $name));
-            
         } catch (Exception $ex) {
-            
+
             return json_encode(array("error" => "Error: " . $ex->getMessage()));
-            
         }
     }
 

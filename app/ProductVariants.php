@@ -6,35 +6,30 @@ use Illuminate\Database\Eloquent\Model;
 use App\Attributes;
 use App\StockItems;
 
-
 class ProductVariants extends Model {
 
     protected $table = 'product_variants';
 
     public function product() {
-        
+
         return $this->belongsTo(Products::class);
-        
     }
 
     public function attributables() {
-        
+
         return $this->morphMany('App\Attributables', 'attributable');
-        
     }
 
     public function stockables() {
-        
+
         return $this->morphMany('App\StockItems', 'stockable');
-        
     }
 
     public function packables() {
-        
+
         return $this->morphMany('App\Packages', 'packable');
-        
     }
-    
+
     /**
      * Retrieve the product_variants of a product and 
      * their attributes
@@ -60,7 +55,7 @@ class ProductVariants extends Model {
 
         return $variants_arr;
     }
-    
+
     /**
      * Retrieve the attributes of a product variant
      * 
@@ -78,11 +73,10 @@ class ProductVariants extends Model {
                 "value" => $attribute->value
             );
         }
-        
+
         return $attributes_arr;
-        
     }
-    
+
     /**
      * Creates a new item and assign it to the order
      * 
@@ -97,13 +91,13 @@ class ProductVariants extends Model {
                 $package_id = $packable->id;
             }
             $variant->stockables()->save(new StockItems([
-                        'package_id' => $package_id,
-                        'product_variant_id' => $variant->id,
-                        'order_id' => $orderId,
-                        'sku' => $sku,
-                        'status' => 'Assigned',
-                        'physical_status' => 'To order',
-                        'created_by' => 1
+                'package_id' => $package_id,
+                'product_variant_id' => $variant->id,
+                'order_id' => $orderId,
+                'sku' => $sku,
+                'status' => 'Assigned',
+                'physical_status' => 'To order',
+                'created_by' => 1
             ]));
         }
     }

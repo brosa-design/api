@@ -35,7 +35,7 @@ class OrderController extends Controller {
             $orders = new Orders();
             $productVariants = new ProductVariants();
             $stockItems = new StockItems();
-            
+
             $data = $request->all();
             $order = $orders->createOrder($data);
             $items = $data['Order']['items'];
@@ -53,13 +53,12 @@ class OrderController extends Controller {
                     $productVariants->createItem($order->id, $sku, $quanity);
                 }
             }
-            
+
             return json_encode(array("success: " => "Done"));
-            
         } catch (Exception $ex) {
-            
+
             return json_encode(array("error" => "Error: " . $ex->getMessage()));
-            
         }
     }
+
 }

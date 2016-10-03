@@ -7,15 +7,13 @@ use Illuminate\Database\Eloquent\Model;
 class Attributes extends Model {
 
     protected $table = 'attributes';
-    
     protected $fillable = ['name', 'created_by'];
 
     public function attributables() {
-        
+
         return $this->morphMany('App\Attributables', 'attributable');
-        
     }
-    
+
     /**
      * Retrieve the attribute name by id
      * 
@@ -24,9 +22,8 @@ class Attributes extends Model {
      */
     public function getAttributeName($id) {
         $attributes = $this->find($id);
-        
+
         return $attributes->name;
-        
     }
 
 }
