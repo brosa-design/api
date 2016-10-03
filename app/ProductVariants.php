@@ -7,26 +7,31 @@ use Illuminate\Database\Eloquent\Model;
 use App\Attributes;
 use App\StockItems;
 
-class ProductVariants extends Model {
+class ProductVariants extends Model 
+{
 
     protected $table = 'product_variants';
 
-    public function product() {
+    public function product() 
+    {
 
         return $this->belongsTo(Products::class);
     }
 
-    public function attributables() {
+    public function attributables() 
+    {
 
         return $this->morphMany('App\Attributables', 'attributable');
     }
 
-    public function stockables() {
+    public function stockables() 
+    {
 
         return $this->morphMany('App\StockItems', 'stockable');
     }
 
-    public function packables() {
+    public function packables() 
+    {
 
         return $this->morphMany('App\Packages', 'packable');
     }
@@ -38,7 +43,8 @@ class ProductVariants extends Model {
      * @param  int  $id
      * @return array Array of all retrieved variants 
      */
-    public function getVariantsByProduct($id) {
+    public function getVariantsByProduct($id) 
+    {
         $variants = $this->where('product_id', $id)
                 ->orderBy('sku', 'desc')
                 ->get();
@@ -63,7 +69,8 @@ class ProductVariants extends Model {
      * @param  int  $id
      * @return array Array of all retrieved attributes 
      */
-    public function getAttributesByVariant($id) {
+    public function getAttributesByVariant($id) 
+    {
         $attributes = $this->find($id)->attributables;
         $attributes_arr = array();
         $att = new Attributes();
@@ -85,7 +92,8 @@ class ProductVariants extends Model {
      * @param string $sku
      * @param int $count  
      */
-    public function createItem($orderId, $sku, $count) {
+    public function createItem($orderId, $sku, $count) 
+    {
         for ($i = 1; $i <= $count; $i++) {
             $variant = $this->where('sku', $sku)->first();
             foreach ($variant->packables as $packable) {
@@ -109,7 +117,8 @@ class ProductVariants extends Model {
      * @param int $orderId  
      * @param array $items  
      */
-    public function updateItem($orderId, $items) {
+    public function updateItem($orderId, $items) 
+    {
         foreach ($items as $item) {
             $item->order_id = $orderId;
             $item->status = 'Assigned';

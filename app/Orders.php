@@ -4,11 +4,13 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Orders extends Model {
+class Orders extends Model 
+{
 
     protected $table = 'orders';
 
-    public function stockItem() {
+    public function stockItem() 
+    {
 
         return $this->hasMany(StockItems::class);
     }
@@ -19,7 +21,8 @@ class Orders extends Model {
      * @param array $data
      * @return Orders object
      */
-    public function createOrder($data) {
+    public function createOrder($data) 
+    {
         $order = $this;
         $order->name = $data['Order']['customer'];
         $order->address = $data['Order']['address'];

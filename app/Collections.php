@@ -4,11 +4,13 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Collections extends Model {
+class Collections extends Model 
+{
 
     protected $table = 'collections';
 
-    public function product() {
+    public function product() 
+    {
 
         return $this->hasMany(Products::class);
     }
@@ -19,7 +21,8 @@ class Collections extends Model {
      * @param  int  $id
      * @return string Category name 
      */
-    public function getCategoryName($id) {
+    public function getCategoryName($id) 
+    {
         $collection = $this->find($id);
 
         return $collection->name;

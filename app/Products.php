@@ -4,21 +4,25 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Products extends Model {
+class Products extends Model 
+{
 
     protected $table = 'products';
 
-    public function collection() {
+    public function collection() 
+    {
 
         return $this->belongsTo(Collections::class);
     }
 
-    public function stockItems() {
+    public function stockItems()
+    {
 
         return $this->belongsTo(StockItems::class);
     }
 
-    public function variant() {
+    public function variant() 
+    {
 
         return $this->hasMany(ProductVariants::class);
     }

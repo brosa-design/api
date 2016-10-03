@@ -4,12 +4,14 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Attributes extends Model {
+class Attributes extends Model 
+{
 
     protected $table = 'attributes';
     protected $fillable = ['name', 'created_by'];
 
-    public function attributables() {
+    public function attributables() 
+    {
 
         return $this->morphMany('App\Attributables', 'attributable');
     }
@@ -20,7 +22,8 @@ class Attributes extends Model {
      * @param  int  $id
      * @return string Attribute name 
      */
-    public function getAttributeName($id) {
+    public function getAttributeName($id) 
+    {
         $attributes = $this->find($id);
 
         return $attributes->name;
