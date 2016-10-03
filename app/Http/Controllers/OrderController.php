@@ -22,7 +22,8 @@ use App\StockItems;
 use App\Orders;
 use App\ProductVariants;
 
-class OrderController extends Controller {
+class OrderController extends Controller 
+{
 
     /**
      * Updates or Creates an Iteam depeding on the
@@ -31,7 +32,8 @@ class OrderController extends Controller {
      * @param  Request  $request 
      * @return JSON object
      */
-    public function store(Request $request) {
+    public function store(Request $request) 
+    {
         try {
             $orders = new Orders();
             $productVariants = new ProductVariants();

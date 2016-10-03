@@ -20,7 +20,8 @@ use App\Attributables;
 use App\ProductVariants;
 use App\StockItems;
 
-class VariantsController extends Controller {
+class VariantsController extends Controller 
+{
 
     /**
      * Updates and attribute's value or Creates an attribute if it does not exist
@@ -29,7 +30,8 @@ class VariantsController extends Controller {
      * @param       Request  $request 
      * @response    JSON Object
      */
-    public function store(Request $request) {
+    public function store(Request $request) 
+    {
         try {
             $variantId = func_get_arg(1);
             if (func_num_args() == 3) {
@@ -85,7 +87,8 @@ class VariantsController extends Controller {
      * @param  string  $value
      * 
      */
-    public function createAttributable($variantId, $attributeId, $value) {
+    public function createAttributable($variantId, $attributeId, $value) 
+    {
         $productAttribute = ProductVariants::find($variantId);
         $productAttribute->attributables()->save(Attributables::firstOrNew([
                     'attribute_id' => $attributeId,
@@ -93,5 +96,4 @@ class VariantsController extends Controller {
                     'created_by' => 1
         ]));
     }
-
 }

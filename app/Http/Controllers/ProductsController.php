@@ -21,7 +21,8 @@ use App\Http\Requests;
 use Illuminate\Http\Request;
 use Illuminate\Pagination\Paginator;
 
-class ProductsController extends Controller {
+class ProductsController extends Controller 
+{
 
     private $rpp = 25; //Results Per Page
 
@@ -70,7 +71,8 @@ class ProductsController extends Controller {
      * @param  int  $id
      * @return JSON object  
      */
-    public function getVariants($id) {
+    public function getVariants($id) 
+    {
         $currentPage = isset($_GET['page']) ? $_GET['page'] : 1;
         Paginator::currentPageResolver(function() use ($currentPage) {
 
