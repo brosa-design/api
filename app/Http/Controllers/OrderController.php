@@ -63,6 +63,5 @@ class OrderController extends Controller
             return json_encode(array("error" => "Error: " . $ex->getMessage()));
         }
     }
-
 }
 ?>

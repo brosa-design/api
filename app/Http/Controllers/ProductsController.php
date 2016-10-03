@@ -101,6 +101,5 @@ class ProductsController extends Controller
             "pages" => ceil(($variants->total()) / $this->rpp),
             "current_page" => $variants->currentPage()));
     }
-
 }
 ?>
