@@ -18,15 +18,13 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
-use App\StockItems;
-use App\Orders;
-use App\ProductVariants;
+use App\Processors\OrderProcessors;
 
 class OrderController extends Controller 
 {
 
     /**
-     * Updates or Creates an Iteam depeding on the
+     * Updates or Creates an Item depending on the
      * order requirement
      * 
      * @param  Request  $request 
@@ -34,34 +32,11 @@ class OrderController extends Controller
      */
     public function store(Request $request) 
     {
-        try {
-            $orders = new Orders();
-            $productVariants = new ProductVariants();
-            $stockItems = new StockItems();
-
             $data = $request->all();
-            $order = $orders->createOrder($data);
-            $items = $data['Order']['items'];
-            foreach ($items as $item) {
-                $sku = $item['sku'];
-                $quanity = $item['quantity'];
-                $inStock = $stockItems->matchSku($sku);
-                if (count($inStock) > 0) {
-                    $notInStock = $quanity - count($inStock);
-                    if ($notInStock > 0) {
-                        $productVariants->createItem($order->id, $sku, $notInStock);
-                    }
-                    $productVariants->updateItem($order->id, $inStock);
-                } else {
-                    $productVariants->createItem($order->id, $sku, $quanity);
-                }
-            }
+            $order = new OrderProcessors($data);
 
-            return json_encode(array("success: " => "Done"));
-        } catch (Exception $ex) {
-
-            return json_encode(array("error" => "Error: " . $ex->getMessage()));
-        }
+            return $order->processOrder($data);
+            
     }
 }
 ?>

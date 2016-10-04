@@ -1,6 +1,6 @@
 <?php
 
-namespace App;
+namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
@@ -13,7 +13,7 @@ class Attributes extends Model
     public function attributables() 
     {
 
-        return $this->morphMany('App\Attributables', 'attributable');
+        return $this->morphMany('App\Models\Attributables', 'attributable');
     }
 
     /**
