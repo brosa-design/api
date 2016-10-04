@@ -164,7 +164,7 @@ The app is able to do the following,
 
 1. Checkout HEAD rivision of this repo to the webserver's root folder 
 2. Create MySql Database, brosa_test
-<del>3. Import SQL (http://115.248.209.92/api/api.sql)</del>
+<br><del>3. Import SQL (http://115.248.209.92/api/api.sql)</del>
 3. Import SQL (http://115.248.209.92/api/api2.sql)
 4. Modify DB_ parameters in the env file to reflect the connection to the database
 5. Use Postman or similar API Client to consume webservices
@@ -182,7 +182,7 @@ The app is able to do the following,
 ## To do
 
 1. Since this is my first production/staging level implementation, I have not fully realised the potential of Laravel. I would like to study more and look at the possibilties to make the app more structured and optimised
-<del>2. Considering the size of the app some model functions are included and called from within the controller itself. That can be refactored.</del> 
+<br><del>2. Considering the size of the app some model functions are included and called from within the controller itself. That can be refactored.</del> 
 3. The code is compliant to the PSR-2 standards which I am experienced with. I have attempted to comply to PSR-4. If there is room for improvement, kindly suggest. 
 4. Unit test the make Order API call
 5. The test app can have the user Auth implemented to streamline the transactions, especially the make Order
